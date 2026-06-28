@@ -1,0 +1,4 @@
+[*.cs]
+file_header_template = // NexPresenter
+                        // Copyright (c) 2026 NovaDev404
+                        // Licensed under the MIT License
