@@ -1,5 +1,5 @@
 ﻿<p align="center">
-  <img src="Assets/full_title_logo_transparent.png" alt="NexPresenter" width="700">
+  <img src="Assets/full_title_logo_transparent.png" alt="NexPresenter" height="500">
 </p>
 
 <p align="center">
