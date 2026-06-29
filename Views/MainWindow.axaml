@@ -31,9 +31,9 @@
             <!-- Sidebar -->
             <Border Grid.Row="0" Grid.Column="0" Background="{DynamicResource SystemChromeMediumColor}" Padding="16">
                 <StackPanel Spacing="12">
-                    <Image Source="/Assets/full_title_logo_square.png" MaxHeight="100" Stretch="Uniform" HorizontalAlignment="Center" Margin="0,0,0,8"/>
-                    <Button Content="Home" HorizontalAlignment="Stretch" Command="{Binding NavigateHomeCommand}"/>
-                    <Button Content="Slides" HorizontalAlignment="Stretch"/>
+                    <Image Source="/Assets/full_title_logo_square.png" MaxHeight="100" Stretch="Uniform" HorizontalAlignment="Center"/>
+                    <Button Content="+" Command="{Binding AddSectionCommand}" FontSize="24" Padding="12" HorizontalAlignment="Stretch"/>
+                    <Button Content="← Back" Command="{Binding NavigateHomeCommand}" Padding="12" HorizontalAlignment="Stretch"/>
                 </StackPanel>
             </Border>
 
@@ -41,7 +41,13 @@
             <Grid Grid.Row="0" Grid.Column="1" RowDefinitions="Auto,*">
                 <!-- Top Bar -->
                 <Border Grid.Row="0" Background="{DynamicResource SystemAccentColor}" Padding="16,8">
-                    <Button Content="Settings" Command="{Binding SettingsCommand}" Background="Transparent" Foreground="White" Padding="12,6" HorizontalAlignment="Right"/>
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="8">
+                            <Button Content="Presentation" Command="{Binding NavigatePresentationCommand}" Background="Transparent" Foreground="White" Padding="12,6"/>
+                            <Button Content="Slide Editor" Command="{Binding NavigateSlideEditorCommand}" Background="Transparent" Foreground="White" Padding="12,6"/>
+                        </StackPanel>
+                        <Button Grid.Column="2" Content="Settings" Command="{Binding SettingsCommand}" Background="Transparent" Foreground="White" Padding="12,6" HorizontalAlignment="Right"/>
+                    </Grid>
                 </Border>
 
                 <!-- Content -->

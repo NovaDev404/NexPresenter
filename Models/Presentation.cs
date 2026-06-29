@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 
 namespace NexPresenter.Models;
 
@@ -10,4 +11,5 @@ public class Presentation
     public DateTime CreatedAt { get; set; }
     public DateTime ModifiedAt { get; set; }
     public string ThumbnailPath { get; set; } = string.Empty;
+    public ObservableCollection<Section> Sections { get; set; } = new();
 }

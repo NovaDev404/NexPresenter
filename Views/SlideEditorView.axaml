@@ -1,0 +1,95 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:NexPresenter.ViewModels"
+             xmlns:models="using:NexPresenter.Models"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
+             x:Class="NexPresenter.Views.SlideEditorView"
+             x:DataType="vm:SlideEditorViewModel">
+
+    <Design.DataContext>
+        <vm:SlideEditorViewModel/>
+    </Design.DataContext>
+
+    <ScrollViewer>
+        <Border Padding="24">
+            <StackPanel Spacing="16">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Grid.Column="0" Text="Slide Editor" FontSize="24" FontWeight="SemiBold" Margin="0,0,0,16"/>
+                    <Button Grid.Column="1" Content="Save" Command="{Binding SaveCommand}" Padding="12,8" Margin="0,0,0,16"/>
+                </Grid>
+            
+            <ItemsControl ItemsSource="{Binding Sections}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="models:Section">
+                        <Border Background="{DynamicResource SystemChromeMediumColor}" 
+                                CornerRadius="8" 
+                                Padding="16" 
+                                Margin="0,8">
+                            <StackPanel Spacing="12">
+                                <!-- Section Header -->
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <TextBlock Grid.Column="0" Text="{Binding Name}" FontSize="18" FontWeight="SemiBold"/>
+                                    <Button Grid.Column="1" Content="✕" 
+                                            Click="OnDeleteSectionClick" 
+                                            Tag="{Binding}" 
+                                            Background="Transparent" Padding="8,4"/>
+                                </Grid>
+
+                                <!-- Slides -->
+                                <ItemsControl ItemsSource="{Binding Slides}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate DataType="models:Slide">
+                                            <Border Background="{DynamicResource SystemChromeLowColor}" 
+                                                    CornerRadius="4" 
+                                                    Padding="12" 
+                                                    Margin="0,4">
+                                                <Grid ColumnDefinitions="*,Auto">
+                                                    <TextBox Grid.Column="0" 
+                                                             Text="{Binding Content}" 
+                                                             PlaceholderText="Enter slide content..." 
+                                                             AcceptsReturn="True" 
+                                                             TextWrapping="Wrap"/>
+                                                    <Button Grid.Column="1" 
+                                                            Content="✕" 
+                                                            Click="OnDeleteSlideClick" 
+                                                            Tag="{Binding}" 
+                                                            Background="Transparent" 
+                                                            Padding="8,4" 
+                                                            Margin="8,0,0,0"/>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                                <!-- Add Slide Button -->
+                                <Button Content="+ Add Slide" 
+                                        Click="OnAddSlideClick" 
+                                        Tag="{Binding}"
+                                        HorizontalAlignment="Stretch" 
+                                        Padding="12,8"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- No Sections Message -->
+            <Border Background="{DynamicResource SystemChromeMediumColor}" 
+                    CornerRadius="8" 
+                    Padding="24"
+                    IsVisible="{Binding Sections.Count, Converter={x:Static ObjectConverters.Equal}, ConverterParameter=0}">
+                <StackPanel Spacing="12" HorizontalAlignment="Center">
+                    <TextBlock Text="📝" FontSize="48" HorizontalAlignment="Center"/>
+                    <TextBlock Text="No sections yet. Add a section to get started." 
+                              FontSize="16" 
+                              Foreground="{DynamicResource SystemChromeGrayBrush}"
+                              HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+            </StackPanel>
+        </Border>
+    </ScrollViewer>
+</UserControl>

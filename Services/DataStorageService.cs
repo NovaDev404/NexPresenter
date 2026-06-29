@@ -33,7 +33,12 @@ public class DataStorageService
         try
         {
             var json = File.ReadAllText(_presentationsFile);
-            return JsonSerializer.Deserialize<List<Presentation>>(json) ?? new List<Presentation>();
+            var options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true
+            };
+            return JsonSerializer.Deserialize<List<Presentation>>(json, options) ?? new List<Presentation>();
         }
         catch
         {
@@ -43,11 +48,18 @@ public class DataStorageService
 
     public void SavePresentations(List<Presentation> presentations)
     {
-        var json = JsonSerializer.Serialize(presentations, new JsonSerializerOptions 
-        { 
-            WriteIndented = true 
-        });
+        var options = new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            WriteIndented = true
+        };
+        var json = JsonSerializer.Serialize(presentations, options);
         File.WriteAllText(_presentationsFile, json);
+    }
+
+    public List<Presentation> GetPresentations()
+    {
+        return LoadPresentations();
     }
 
     public Presentation CreatePresentation(string name, string description = "")

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using NexPresenter.Models;
@@ -29,6 +31,9 @@ public partial class PresentationViewModel : ViewModelBase
     [ObservableProperty]
     private bool _showDetails = false;
 
+    [ObservableProperty]
+    private ObservableCollection<Slide> _allSlides = new();
+
     public Guid Id => _presentation.Id;
 
     public event Action? GoBack;
@@ -42,6 +47,32 @@ public partial class PresentationViewModel : ViewModelBase
         Description = presentation.Description;
         CreatedAt = presentation.CreatedAt;
         ModifiedAt = presentation.ModifiedAt;
+
+        // Load all slides from all sections
+        LoadSlides();
+    }
+
+    public void LoadSlides()
+    {
+        // Reload presentation from storage to get latest changes
+        var updatedPresentation = _storageService.GetPresentation(_presentation.Id);
+        if (updatedPresentation != null)
+        {
+            _presentation.Sections.Clear();
+            foreach (var section in updatedPresentation.Sections)
+            {
+                _presentation.Sections.Add(section);
+            }
+        }
+        
+        AllSlides.Clear();
+        foreach (var section in _presentation.Sections)
+        {
+            foreach (var slide in section.Slides)
+            {
+                AllSlides.Add(slide);
+            }
+        }
     }
 
     [RelayCommand]

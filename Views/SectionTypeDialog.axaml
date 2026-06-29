@@ -1,0 +1,47 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:NexPresenter.ViewModels"
+        xmlns:models="using:NexPresenter.Models"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300"
+        x:Class="NexPresenter.Views.SectionTypeDialog"
+        x:DataType="vm:SectionTypeDialogViewModel"
+        Title="Add Section"
+        Width="400"
+        Height="300"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner">
+
+    <Design.DataContext>
+        <vm:SectionTypeDialogViewModel/>
+    </Design.DataContext>
+
+    <Border Padding="24">
+        <Grid RowDefinitions="Auto,*,Auto">
+            <TextBlock Grid.Row="0" Text="Select Section Type" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,24"/>
+            
+            <StackPanel Grid.Row="1" Spacing="12" VerticalAlignment="Center">
+                <Button Content="Song" 
+                        Command="{Binding SelectSongCommand}" 
+                        HorizontalAlignment="Stretch" 
+                        Padding="16,12" 
+                        FontSize="16"/>
+                
+                <Button Content="Slides" 
+                        IsEnabled="False" 
+                        HorizontalAlignment="Stretch" 
+                        Padding="16,12" 
+                        FontSize="16"
+                        Opacity="0.5"/>
+            </StackPanel>
+            
+            <Button Grid.Row="2" 
+                    Content="Cancel" 
+                    Command="{Binding CancelCommand}" 
+                    HorizontalAlignment="Center" 
+                    Padding="16,8"
+                    Margin="0,16,0,0"/>
+        </Grid>
+    </Border>
+</Window>
