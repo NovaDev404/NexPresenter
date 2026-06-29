@@ -11,67 +11,58 @@
         <vm:PresentationViewModel/>
     </Design.DataContext>
 
-    <Grid RowDefinitions="Auto,*">
-        <!-- Header -->
-        <Border Grid.Row="0" Background="{DynamicResource SystemChromeMediumLowColor}" Padding="24,16">
-            <Grid ColumnDefinitions="Auto,*,Auto">
-                <Button Grid.Column="0" Content="← Back" Command="{Binding BackCommand}" Margin="0,0,16,0"/>
-                <TextBlock Grid.Column="1" Text="Presentation Details" FontSize="28" FontWeight="SemiBold"/>
-                <Button Grid.Column="2" Content="Save" Command="{Binding SaveCommand}" Padding="16,8" FontSize="14"/>
-            </Grid>
+    <Grid>
+        <!-- Slides View (Default) -->
+        <Border IsVisible="{Binding ShowSlides}">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="12">
+                <TextBlock Text="📽️" FontSize="64" HorizontalAlignment="Center"/>
+                <TextBlock Text="Slides will appear here" 
+                          FontSize="18" 
+                          Foreground="{DynamicResource SystemChromeGrayBrush}"
+                          HorizontalAlignment="Center"/>
+            </StackPanel>
         </Border>
 
-        <!-- Content -->
-        <ScrollViewer Grid.Row="1">
+        <!-- Details View -->
+        <ScrollViewer IsVisible="{Binding ShowDetails}">
             <Border Padding="32">
                 <StackPanel Spacing="24">
-                <!-- Name -->
-                <StackPanel Spacing="8">
-                    <TextBlock Text="Presentation Name" FontWeight="SemiBold" FontSize="14"/>
-                    <TextBox Text="{Binding Name}" PlaceholderText="Enter presentation name..." FontSize="16" Padding="12"/>
-                </StackPanel>
-
-                <!-- Description -->
-                <StackPanel Spacing="8">
-                    <TextBlock Text="Description" FontWeight="SemiBold" FontSize="14"/>
-                    <TextBox Text="{Binding Description}" 
-                             PlaceholderText="Enter a description..." 
-                             FontSize="14" 
-                             Padding="12"
-                             AcceptsReturn="True"
-                             TextWrapping="Wrap"
-                             Height="120"/>
-                </StackPanel>
-
-                <!-- Metadata -->
-                <Border Background="{DynamicResource SystemChromeMediumColor}" 
-                        CornerRadius="8" 
-                        Padding="16">
-                    <StackPanel Spacing="12">
-                        <TextBlock Text="Information" FontWeight="SemiBold" FontSize="16"/>
-                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto">
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Created:" FontWeight="SemiBold" Margin="0,0,8,0"/>
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding CreatedAt, StringFormat='{}{0:MMMM dd, yyyy at HH:mm}'}"/>
-                            
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Last Modified:" FontWeight="SemiBold" Margin="0,0,8,0"/>
-                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ModifiedAt, StringFormat='{}{0:MMMM dd, yyyy at HH:mm}'}"/>
-                        </Grid>
+                    <!-- Name -->
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="Presentation Name" FontWeight="SemiBold" FontSize="14"/>
+                        <TextBox Text="{Binding Name}" PlaceholderText="Enter presentation name..." FontSize="16" Padding="12"/>
                     </StackPanel>
-                </Border>
 
-                <!-- Slides placeholder -->
-                <Border Background="{DynamicResource SystemChromeMediumColor}" 
-                        CornerRadius="8" 
-                        Padding="16"
-                        Height="300">
-                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="12">
-                        <TextBlock Text="📽️" FontSize="64" HorizontalAlignment="Center"/>
-                        <TextBlock Text="Slides will appear here" 
-                                  FontSize="18" 
-                                  Foreground="{DynamicResource SystemChromeGrayBrush}"
-                                  HorizontalAlignment="Center"/>
+                    <!-- Description -->
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="Description" FontWeight="SemiBold" FontSize="14"/>
+                        <TextBox Text="{Binding Description}" 
+                                 PlaceholderText="Enter a description..." 
+                                 FontSize="14" 
+                                 Padding="12"
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"
+                                 Height="120"/>
                     </StackPanel>
-                </Border>
+
+                    <!-- Metadata -->
+                    <Border Background="{DynamicResource SystemChromeMediumColor}" 
+                            CornerRadius="8" 
+                            Padding="16">
+                        <StackPanel Spacing="12">
+                            <TextBlock Text="Information" FontWeight="SemiBold" FontSize="16"/>
+                            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto">
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Created:" FontWeight="SemiBold" Margin="0,0,8,0"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding CreatedAt, StringFormat='{}{0:MMMM dd, yyyy at HH:mm}'}"/>
+                                
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Last Modified:" FontWeight="SemiBold" Margin="0,0,8,0"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ModifiedAt, StringFormat='{}{0:MMMM dd, yyyy at HH:mm}'}"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Save Button -->
+                    <Button Content="Save" Command="{Binding SaveCommand}" HorizontalAlignment="Stretch" Padding="16,12" FontSize="16"/>
                 </StackPanel>
             </Border>
         </ScrollViewer>

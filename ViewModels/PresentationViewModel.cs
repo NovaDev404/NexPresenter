@@ -23,6 +23,12 @@ public partial class PresentationViewModel : ViewModelBase
     [ObservableProperty]
     private DateTime _modifiedAt;
 
+    [ObservableProperty]
+    private bool _showSlides = true;
+
+    [ObservableProperty]
+    private bool _showDetails = false;
+
     public Guid Id => _presentation.Id;
 
     public event Action? GoBack;
@@ -51,5 +57,11 @@ public partial class PresentationViewModel : ViewModelBase
     private void Back()
     {
         GoBack?.Invoke();
+    }
+
+    public void ToggleDetails()
+    {
+        ShowSlides = !ShowSlides;
+        ShowDetails = !ShowDetails;
     }
 }

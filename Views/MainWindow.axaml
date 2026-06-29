@@ -15,26 +15,46 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <Grid RowDefinitions="*,Auto" ColumnDefinitions="200,*">
-        <!-- Sidebar -->
-        <Border Grid.Row="0" Grid.Column="0" Background="{DynamicResource SystemChromeMediumColor}" Padding="16">
-            <StackPanel Spacing="12">
-                <Image Source="/Assets/full_title_logo_square.png" MaxHeight="100" Stretch="Uniform" HorizontalAlignment="Center" Margin="0,0,0,8"/>
-                <Button Content="Home" HorizontalAlignment="Stretch"/>
-                <Button Content="Slides" HorizontalAlignment="Stretch"/>
-                <Button Content="Settings" HorizontalAlignment="Stretch"/>
-            </StackPanel>
-        </Border>
+    <Grid>
+        <!-- Home Layout (Full Width) -->
+        <Grid RowDefinitions="*,Auto" IsVisible="{Binding ShowHomeLayout}">
+            <Border Grid.Row="0" Background="{DynamicResource SystemChromeLowColor}">
+                <ContentControl Content="{Binding CurrentView}"/>
+            </Border>
+            <Border Grid.Row="1" Background="{DynamicResource SystemChromeMediumColor}" Padding="16">
+                <TextBlock Text="Status: Ready" HorizontalAlignment="Center"/>
+            </Border>
+        </Grid>
 
-        <!-- Main Content Area -->
-        <Border Grid.Row="0" Grid.Column="1" Background="{DynamicResource SystemChromeLowColor}">
-            <ContentControl Content="{Binding CurrentView}"/>
-        </Border>
+        <!-- Presentation Layout (With Sidebar and Top Bar) -->
+        <Grid RowDefinitions="*,Auto" ColumnDefinitions="200,*" IsVisible="{Binding ShowSidebar}">
+            <!-- Sidebar -->
+            <Border Grid.Row="0" Grid.Column="0" Background="{DynamicResource SystemChromeMediumColor}" Padding="16">
+                <StackPanel Spacing="12">
+                    <Image Source="/Assets/full_title_logo_square.png" MaxHeight="100" Stretch="Uniform" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                    <Button Content="Home" HorizontalAlignment="Stretch" Command="{Binding NavigateHomeCommand}"/>
+                    <Button Content="Slides" HorizontalAlignment="Stretch"/>
+                </StackPanel>
+            </Border>
 
-        <!-- Bottom Bar -->
-        <Border Grid.Row="1" Grid.ColumnSpan="2" Background="{DynamicResource SystemChromeMediumColor}" Padding="16">
-            <TextBlock Text="Status: Ready" HorizontalAlignment="Center"/>
-        </Border>
+            <!-- Main Content Area with Top Bar -->
+            <Grid Grid.Row="0" Grid.Column="1" RowDefinitions="Auto,*">
+                <!-- Top Bar -->
+                <Border Grid.Row="0" Background="{DynamicResource SystemAccentColor}" Padding="16,8">
+                    <Button Content="Settings" Command="{Binding SettingsCommand}" Background="Transparent" Foreground="White" Padding="12,6" HorizontalAlignment="Right"/>
+                </Border>
+
+                <!-- Content -->
+                <Border Grid.Row="1" Background="{DynamicResource SystemChromeLowColor}">
+                    <ContentControl Content="{Binding CurrentView}"/>
+                </Border>
+            </Grid>
+
+            <!-- Bottom Bar -->
+            <Border Grid.Row="1" Grid.ColumnSpan="2" Background="{DynamicResource SystemChromeMediumColor}" Padding="16">
+                <TextBlock Text="Status: Ready" HorizontalAlignment="Center"/>
+            </Border>
+        </Grid>
     </Grid>
 
 </Window>
