@@ -64,12 +64,12 @@
                                               Foreground="{DynamicResource SystemChromeGrayBrush}"/>
                                     <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
                                         <Button Content="Open" 
-                                                Command="{Binding $parent[UserControl].DataContext.SelectPresentationCommand}" 
-                                                CommandParameter="{Binding}"
+                                                Click="OnOpenClick" 
+                                                Tag="{Binding}"
                                                 Padding="8,4"/>
                                         <Button Content="Delete" 
-                                                Command="{Binding $parent[UserControl].DataContext.DeletePresentationCommand}" 
-                                                CommandParameter="{Binding Id}"
+                                                Click="OnDeleteClick" 
+                                                Tag="{Binding Id}"
                                                 Padding="8,4"/>
                                     </StackPanel>
                                 </Grid>
