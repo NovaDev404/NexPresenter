@@ -32,8 +32,8 @@
             <Border Grid.Row="0" Grid.Column="0" Background="{DynamicResource SystemChromeMediumColor}" Padding="16">
                 <StackPanel Spacing="12">
                     <Image Source="/Assets/full_title_logo_square.png" MaxHeight="100" Stretch="Uniform" HorizontalAlignment="Center"/>
-                    <Button Content="+" Command="{Binding AddSectionCommand}" FontSize="24" Padding="12" HorizontalAlignment="Stretch"/>
                     <Button Content="← Back" Command="{Binding NavigateHomeCommand}" Padding="12" HorizontalAlignment="Stretch"/>
+                    <Button Content="+" Command="{Binding AddSectionCommand}" FontSize="24" Padding="12" HorizontalAlignment="Stretch"/>
                 </StackPanel>
             </Border>
 

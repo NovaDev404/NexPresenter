@@ -15,27 +15,50 @@
     <Grid>
         <!-- Slides View (Default) -->
         <ScrollViewer IsVisible="{Binding ShowSlides}">
-            <ItemsControl ItemsSource="{Binding AllSlides}">
+            <ItemsControl ItemsSource="{Binding Sections}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal"/>
+                        <StackPanel Orientation="Vertical"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="models:Slide">
-                        <Border Background="{DynamicResource SystemChromeMediumColor}" 
-                                CornerRadius="8" 
-                                Padding="16" 
-                                Margin="12" 
-                                Width="300" 
-                                Height="200"
-                                BoxShadow="0 2 8 rgba(0,0,0,0.1)">
-                            <TextBlock Text="{Binding Content}" 
-                                      TextWrapping="Wrap" 
-                                      FontSize="16" 
-                                      TextAlignment="Center"
-                                      VerticalAlignment="Center"/>
-                        </Border>
+                    <DataTemplate DataType="models:Section">
+                        <StackPanel Spacing="12">
+                            <!-- Section Header -->
+                            <TextBlock Text="{Binding Name}" FontWeight="SemiBold" FontSize="18" Margin="12,12,12,0"/>
+                            
+                            <!-- Slides for this section -->
+                            <ItemsControl ItemsSource="{Binding Slides}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="models:Slide">
+                                        <Border Background="{DynamicResource SystemChromeMediumColor}" 
+                                                CornerRadius="8" 
+                                                Padding="16" 
+                                                Margin="12" 
+                                                Width="300" 
+                                                Height="200"
+                                                BoxShadow="0 2 8 rgba(0,0,0,0.1)">
+                                            <TextBlock Text="{Binding Content}" 
+                                                      TextWrapping="Wrap" 
+                                                      FontSize="16" 
+                                                      TextAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            
+                            <!-- Section Separator -->
+                            <Border Background="{DynamicResource SystemChromeGrayBrush}" 
+                                    Height="2" 
+                                    Margin="24,16,24,0" 
+                                    Opacity="0.3"/>
+                        </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

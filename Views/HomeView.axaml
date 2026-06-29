@@ -11,9 +11,14 @@
         <vm:HomeViewModel/>
     </Design.DataContext>
 
-    <Grid RowDefinitions="Auto,*">
+    <Grid RowDefinitions="Auto,Auto,*">
+        <!-- Branding -->
+        <Border Grid.Row="0" Background="{DynamicResource SystemChromeMediumLowColor}" Padding="24,32">
+            <Image Source="/Assets/full_title_logo_banner.png" MaxHeight="150" Stretch="Uniform" HorizontalAlignment="Center"/>
+        </Border>
+
         <!-- Header -->
-        <Border Grid.Row="0" Background="{DynamicResource SystemChromeMediumLowColor}" Padding="24,16">
+        <Border Grid.Row="1" Background="{DynamicResource SystemChromeMediumLowColor}" Padding="24,16">
             <Grid ColumnDefinitions="*,Auto">
                 <TextBlock Grid.Column="0" Text="Your Presentations" FontSize="28" FontWeight="SemiBold"/>
                 <Button Grid.Column="1" Content="+ New Presentation" Command="{Binding CreateNewPresentationCommand}" 
@@ -22,7 +27,7 @@
         </Border>
 
         <!-- Presentations Grid -->
-        <ScrollViewer Grid.Row="1">
+        <ScrollViewer Grid.Row="2">
             <ItemsControl ItemsSource="{Binding Presentations}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -40,9 +45,8 @@
                                 BoxShadow="0 2 8 rgba(0,0,0,0.1)">
                             <Grid RowDefinitions="*,Auto,Auto">
                                 <!-- Thumbnail placeholder -->
-                                <Border Grid.Row="0" Background="{DynamicResource SystemAccentColor}" 
+                                <Border Grid.Row="0" Background="{DynamicResource TransparentBrush}" 
                                         CornerRadius="4" Margin="0,0,0,12">
-                                    <TextBlock Text="📊" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 
                                 <!-- Name -->

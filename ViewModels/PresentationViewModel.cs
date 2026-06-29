@@ -34,6 +34,9 @@ public partial class PresentationViewModel : ViewModelBase
     [ObservableProperty]
     private ObservableCollection<Slide> _allSlides = new();
 
+    [ObservableProperty]
+    private ObservableCollection<Section> _sections = new();
+
     public Guid Id => _presentation.Id;
 
     public event Action? GoBack;
@@ -77,6 +80,13 @@ public partial class PresentationViewModel : ViewModelBase
             {
                 _presentation.Sections.Add(section);
             }
+        }
+        
+        // Update Sections collection
+        Sections.Clear();
+        foreach (var section in _presentation.Sections)
+        {
+            Sections.Add(section);
         }
         
         AllSlides.Clear();
