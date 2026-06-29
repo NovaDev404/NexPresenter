@@ -16,4 +16,10 @@ public class Section
     public string Name { get; set; } = string.Empty;
     public SectionType Type { get; set; }
     public ObservableCollection<Slide> Slides { get; set; } = new();
+
+    // Ensure Slides collection is initialized on deserialization
+    public Section()
+    {
+        Slides = new ObservableCollection<Slide>();
+    }
 }

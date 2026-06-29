@@ -12,4 +12,10 @@ public class Presentation
     public DateTime ModifiedAt { get; set; }
     public string ThumbnailPath { get; set; } = string.Empty;
     public ObservableCollection<Section> Sections { get; set; } = new();
+
+    // Ensure Sections collection is initialized on deserialization
+    public Presentation()
+    {
+        Sections = new ObservableCollection<Section>();
+    }
 }

@@ -82,7 +82,7 @@ public partial class PresentationViewModel : ViewModelBase
             }
         }
         
-        // Update Sections collection
+        // Update Sections collection with deep copy to ensure UI refresh
         Sections.Clear();
         foreach (var section in _presentation.Sections)
         {
@@ -97,6 +97,9 @@ public partial class PresentationViewModel : ViewModelBase
                 AllSlides.Add(slide);
             }
         }
+        
+        // Force property change notification for Sections
+        OnPropertyChanged(nameof(Sections));
     }
 
     [RelayCommand]

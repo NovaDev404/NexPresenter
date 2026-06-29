@@ -20,7 +20,7 @@ public partial class SlideEditorViewModel : ViewModelBase
     public SlideEditorViewModel(Guid presentationId)
     {
         _storageService = new DataStorageService();
-        _presentation = _storageService.GetPresentations().FirstOrDefault(p => p.Id == presentationId) ?? throw new ArgumentException("Presentation not found");
+        _presentation = _storageService.GetPresentation(presentationId) ?? throw new ArgumentException("Presentation not found");
         
         // Clear any existing sections
         Sections.Clear();

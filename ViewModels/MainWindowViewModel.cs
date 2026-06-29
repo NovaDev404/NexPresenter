@@ -71,12 +71,13 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void NavigateSlideEditor()
     {
-        if (_presentationViewModel != null && _slideEditorViewModel == null)
+        if (_presentationViewModel != null)
         {
+            // Reload presentation from storage to get latest changes before creating editor
+            _presentationViewModel.LoadSlides();
+            
+            // Always create a new SlideEditorViewModel to ensure data isolation
             _slideEditorViewModel = new SlideEditorViewModel(_presentationViewModel.Id);
-        }
-        if (_slideEditorViewModel != null)
-        {
             CurrentView = _slideEditorViewModel;
         }
     }
