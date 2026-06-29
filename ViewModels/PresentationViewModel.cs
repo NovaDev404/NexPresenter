@@ -52,6 +52,20 @@ public partial class PresentationViewModel : ViewModelBase
         LoadSlides();
     }
 
+    partial void OnNameChanged(string value)
+    {
+        _presentation.Name = value;
+        _storageService.UpdatePresentation(_presentation);
+        ModifiedAt = _presentation.ModifiedAt;
+    }
+
+    partial void OnDescriptionChanged(string value)
+    {
+        _presentation.Description = value;
+        _storageService.UpdatePresentation(_presentation);
+        ModifiedAt = _presentation.ModifiedAt;
+    }
+
     public void LoadSlides()
     {
         // Reload presentation from storage to get latest changes
@@ -73,15 +87,6 @@ public partial class PresentationViewModel : ViewModelBase
                 AllSlides.Add(slide);
             }
         }
-    }
-
-    [RelayCommand]
-    private void Save()
-    {
-        _presentation.Name = Name;
-        _presentation.Description = Description;
-        _storageService.UpdatePresentation(_presentation);
-        ModifiedAt = _presentation.ModifiedAt;
     }
 
     [RelayCommand]

@@ -48,13 +48,13 @@
                     <!-- Name -->
                     <StackPanel Spacing="8">
                         <TextBlock Text="Presentation Name" FontWeight="SemiBold" FontSize="14"/>
-                        <TextBox Text="{Binding Name}" PlaceholderText="Enter presentation name..." FontSize="16" Padding="12"/>
+                        <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="Enter presentation name..." FontSize="16" Padding="12"/>
                     </StackPanel>
 
                     <!-- Description -->
                     <StackPanel Spacing="8">
                         <TextBlock Text="Description" FontWeight="SemiBold" FontSize="14"/>
-                        <TextBox Text="{Binding Description}" 
+                        <TextBox Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                  PlaceholderText="Enter a description..." 
                                  FontSize="14" 
                                  Padding="12"
@@ -78,9 +78,6 @@
                             </Grid>
                         </StackPanel>
                     </Border>
-
-                    <!-- Save Button -->
-                    <Button Content="Save" Command="{Binding SaveCommand}" HorizontalAlignment="Stretch" Padding="16,12" FontSize="16"/>
                 </StackPanel>
             </Border>
         </ScrollViewer>

@@ -15,10 +15,7 @@
     <ScrollViewer>
         <Border Padding="24">
             <StackPanel Spacing="16">
-                <Grid ColumnDefinitions="*,Auto">
-                    <TextBlock Grid.Column="0" Text="Slide Editor" FontSize="24" FontWeight="SemiBold" Margin="0,0,0,16"/>
-                    <Button Grid.Column="1" Content="Save" Command="{Binding SaveCommand}" Padding="12,8" Margin="0,0,0,16"/>
-                </Grid>
+                <TextBlock Text="Slide Editor" FontSize="24" FontWeight="SemiBold" Margin="0,0,0,16"/>
             
             <ItemsControl ItemsSource="{Binding Sections}">
                 <ItemsControl.ItemTemplate>
@@ -47,7 +44,7 @@
                                                     Margin="0,4">
                                                 <Grid ColumnDefinitions="*,Auto">
                                                     <TextBox Grid.Column="0" 
-                                                             Text="{Binding Content}" 
+                                                             Text="{Binding Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                                              PlaceholderText="Enter slide content..." 
                                                              AcceptsReturn="True" 
                                                              TextWrapping="Wrap"/>
