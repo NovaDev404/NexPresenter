@@ -3,7 +3,7 @@
         xmlns:vm="using:NexPresenter.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
         x:Class="NexPresenter.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/logo_transparent.png"
@@ -15,6 +15,26 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid RowDefinitions="*,Auto" ColumnDefinitions="200,*">
+        <!-- Sidebar -->
+        <Border Grid.Row="0" Grid.Column="0" Background="{DynamicResource SystemChromeMediumColor}" Padding="16">
+            <StackPanel Spacing="12">
+                <Image Source="/Assets/full_title_logo_square.png" MaxHeight="100" Stretch="Uniform" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                <Button Content="Home" HorizontalAlignment="Stretch"/>
+                <Button Content="Slides" HorizontalAlignment="Stretch"/>
+                <Button Content="Settings" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Main Content Area -->
+        <Border Grid.Row="0" Grid.Column="1" Background="{DynamicResource SystemChromeLowColor}">
+            <ContentControl Content="{Binding CurrentView}"/>
+        </Border>
+
+        <!-- Bottom Bar -->
+        <Border Grid.Row="1" Grid.ColumnSpan="2" Background="{DynamicResource SystemChromeMediumColor}" Padding="16">
+            <TextBlock Text="Status: Ready" HorizontalAlignment="Center"/>
+        </Border>
+    </Grid>
 
 </Window>

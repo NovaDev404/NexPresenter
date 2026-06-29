@@ -1,0 +1,79 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:NexPresenter.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
+             x:Class="NexPresenter.Views.HomeView"
+             x:DataType="vm:HomeViewModel">
+
+    <Design.DataContext>
+        <vm:HomeViewModel/>
+    </Design.DataContext>
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Header -->
+        <Border Grid.Row="0" Background="{DynamicResource SystemChromeMediumLowColor}" Padding="24,16">
+            <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Grid.Column="0" Text="Your Presentations" FontSize="28" FontWeight="SemiBold"/>
+                <Button Grid.Column="1" Content="+ New Presentation" Command="{Binding CreateNewPresentationCommand}" 
+                        Padding="16,8" FontSize="14"/>
+            </Grid>
+        </Border>
+
+        <!-- Presentations Grid -->
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl ItemsSource="{Binding Presentations}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="{DynamicResource SystemChromeMediumColor}" 
+                                CornerRadius="8" 
+                                Margin="12" 
+                                Padding="16"
+                                Width="280"
+                                Height="200"
+                                BoxShadow="0 2 8 rgba(0,0,0,0.1)">
+                            <Grid RowDefinitions="*,Auto,Auto">
+                                <!-- Thumbnail placeholder -->
+                                <Border Grid.Row="0" Background="{DynamicResource SystemAccentColor}" 
+                                        CornerRadius="4" Margin="0,0,0,12">
+                                    <TextBlock Text="📊" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                
+                                <!-- Name -->
+                                <TextBlock Grid.Row="1" Text="{Binding Name}" 
+                                          FontWeight="SemiBold" 
+                                          FontSize="16" 
+                                          TextTrimming="CharacterEllipsis"
+                                          Margin="0,0,0,4"/>
+                                
+                                <!-- Actions -->
+                                <Grid Grid.Row="2" ColumnDefinitions="*,Auto">
+                                    <TextBlock Grid.Column="0" 
+                                              Text="{Binding ModifiedAt, StringFormat='{}Modified: {0:MMM dd, yyyy}'}" 
+                                              FontSize="12" 
+                                              Foreground="{DynamicResource SystemChromeGrayBrush}"/>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                                        <Button Content="Open" 
+                                                Command="{Binding $parent[UserControl].DataContext.SelectPresentationCommand}" 
+                                                CommandParameter="{Binding}"
+                                                Padding="8,4"/>
+                                        <Button Content="Delete" 
+                                                Command="{Binding $parent[UserControl].DataContext.DeletePresentationCommand}" 
+                                                CommandParameter="{Binding Id}"
+                                                Padding="8,4"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
